@@ -1,9 +1,12 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Amaïa
+ * Gestion des erreurs
+ *
+ * @author Amaïa
+ * @version 0.0.1
+ *
  * Date: 29/09/2016
- * Time: 16:07
+ *
  */
 
 ?>
