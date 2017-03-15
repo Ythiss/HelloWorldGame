@@ -9,5 +9,5 @@ PHP/MySQL
 #### V1 :
 Procedural PHP
 
-#### V2 :
+#### V2 [![Build Status](https://github.com/Ythiss/HelloWorldGame/tree/develop)][develop] :
 PHP with MVC pattern
