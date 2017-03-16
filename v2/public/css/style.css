@@ -59,7 +59,7 @@ div#homeGame h1{
     border-color: #E82512;
 }
 
-btn btn-primary active{
+.btn .btn-primary:active{
     color: #ffffff;
     background-color: #d9534f;
     border-color: #E82512;
@@ -93,6 +93,9 @@ a {
 a {
     background: transparent;
 }
+
+
+
 *, *::before, *::after {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -120,6 +123,10 @@ a {
 
 .navbar-default .navbar-nav > li > a {
     color: #757a80;
+}
+
+.navbar-default .navbar-nav > li > a:hover, a:active{
+    color: #ffffff;
 }
 
 #playerInfos{

@@ -1,27 +1,29 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Amaïa
+ * Classement des joueurs
+ *
+ * @author Amaïa
+ * @version: 0.0.1
+ *
  * Date: 03/10/2016
- * Time: 10:32
+ *
  */
+
 session_start();
 
+require_once 'header.php';
+require_once 'menu.php';
 
-    include 'Database.php';
-    require_once 'header.php';
-    require_once 'menu.php';
+include_once '../actions/bdd/Database.php';
 
-    $bdd = new Database();
+$bdd = new Database();
 
-    $pdo = $bdd->getPDO();
+$pdo = $bdd->getPDO();
 
+include_once '../actions/User.php';
 
-    $prep = $pdo->prepare('SELECT J.id, J.username, S.`playerScore` FROM `scores` S, joueurs J WHERE S.playerID = J.id ORDER BY S.playerScore DESC;');
-    $prep->execute();
-
-
-    ?>
+$user = new User();
+?>
     <div class="container">
         <div class="row">
             <div class="row flex-items-xs-middle">
@@ -34,27 +36,16 @@ session_start();
                             <th>Score</th>
                         </tr>
                         </thead>
-                        <?php
-                        $i = 1;
-                        while (($infos = $prep->fetch()) !== false) { ?>
-                            <tbody>
-                            <tr>
-                                <th><?php echo $i++; ?></th>
-                                <td><?= $infos['username']; ?></td>
-                                <td><?= $infos['playerScore']; ?></td>
-                            </tr>
-                            </tbody>
-                            <?php
-                        }
-                        ?>
+                          <tbody>
+                              <?php
+                                $user->playersRankedScoreTable($pdo);
+                              ?>
+                          </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
     <?php
-
     require_once 'footer.php';
-
-
 ?>

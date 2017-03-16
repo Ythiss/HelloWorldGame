@@ -1,10 +1,20 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Amaïa
+ * Gestion des erreurs
+ *
+ * @author Amaïa
+ * @version 0.0.1
+ *
  * Date: 09/10/2016
- * Time: 19:48
+ *
  */
+
+include_once '../actions/Errors.php';
+
+$check = new Errors();
+$check->checkIsNotConnect();
+
+if(!empty($_SESSION)){
 
 include 'Database.php';
 
@@ -97,4 +107,5 @@ if(isset($_SESSION['id'])) {
 else{
     echo 'Erreur !<br>'. PHP_EOL;
     echo '<a href="../public/account.php"><button type="button" class="btn btn-default">Revenir en arrière</button></a>';
+}
 }

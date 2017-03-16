@@ -1,47 +1,39 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Amaïa
+ * Compte du joueur
+ *
+ * @author Amaïa
+ * @version: 0.0.1
+ *
  * Date: 29/09/2016
- * Time: 22:47
+ *
  */
+
 session_start();
 
 require_once 'header.php';
 require_once 'menu.php';
 
+include_once '../actions/Errors.php';
+include_once '../actions/User.php';
 
+$check = new Errors();
+$check->checkIsNotConnect();
 
-if(empty($_SESSION)){?>
-    <div class="container">
-        <div class="row">
-            <div class="row flex-items-xs-middle">
-                <div class="col-xs">
-                    <p>Vous n'avez pas le droit d'accèder à cette page ! ;)</p><br>
-                    <a href="home.php"><button class="btn btn-primary">Revenir en arrière</button></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <?php
-}else {
-    include 'Database.php';
+if(!empty($_SESSION)){
+    include_once '../actions/bdd/Database.php';
     $bdd = new Database();
 
-    $pdo = $bdd->getPDO();
+    $pdo = $bdd->getPDO($pdo);
 
     if(!empty($_POST)){
         $pseudo = $_POST['username'];
         $mdp = $_POST['psw'];
         $mail = $_POST['email'];
+
+        $user = new User;
+        $user->getPlayerInfos();
     }
-
-
-    $reqJoueur = $pdo->prepare("SELECT id, username, psw, email FROM joueurs WHERE id = ?");
-    $reqJoueur->execute(array($_SESSION['id']));
-    $infos = $reqJoueur->fetch();
-    $reqJoueur->closeCursor();
     ?>
 
     <div class="container">
@@ -86,7 +78,7 @@ if(empty($_SESSION)){?>
                     </div>
                 </form>
                 <br><br>
-                <a href="deleteUser.php"><button type="button" class="btn btn-primary">Supprimmer mon compte</button></a>
+                <a href="deleteUser.php"><button type="button" class="btn btn-primary">Supprimer mon compte</button></a>
             </div>
             <div class="col-xs-6">
                 <h2>Historique de scores</h2>
@@ -119,5 +111,6 @@ if(empty($_SESSION)){?>
         </div>
     </div>
     <?php
-}
+    }
+
 require_once 'footer.php';

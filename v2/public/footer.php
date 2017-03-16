@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion des erreurs
+ * footer
  *
  * @author Amaïa
  * @version 0.0.1

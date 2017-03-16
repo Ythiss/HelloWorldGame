@@ -9,18 +9,17 @@
 session_start();
 
 
-include 'Database.php';
+include_once '../actions/bdd/Database.php';
+include_once '../actions/User.php';
 require_once 'header.php';
 require_once 'menu.php';
 
 $bdd = new Database();
 
 $pdo = $bdd->getPDO();
+var_dump($pdo);
 if(!empty($_SESSION['id'])){
-    $prep = $pdo->prepare('SELECT J.id, J.username, S.`playerScore` FROM `scores` S, joueurs J WHERE S.playerID = J.id AND J.id = ? ORDER BY S.dateScore DESC;');
-    $prep->execute(array($_SESSION['id']));
-    $infos = $prep->fetch();
-    $prep->closeCursor();
+    $user = new User;
 }
 
 ?>
@@ -34,12 +33,7 @@ if(!empty($_SESSION['id'])){
                 <?php if (!empty($_SESSION['id'])): ?>
                 <div id="playerInfos">
                     <table class="table table-condensed">Informations joueur :
-                        <tr>
-                            <td><u>Pseudo</u> : <?php echo $infos['username'];?></td>
-                        </tr>
-                        <tr>
-                            <td><u>Score</u> : <?php echo $infos['playerScore'];?></td>
-                        </tr>
+                        $user->getPlayerInfos($pdo);
                     </table>
                 </div>
             <?php  endif;?>
@@ -55,4 +49,3 @@ if(!empty($_SESSION['id'])){
 require_once 'footer.php';
 
 ?>
-
