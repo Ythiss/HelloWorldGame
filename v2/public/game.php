@@ -20,6 +20,7 @@ $pdo = $bdd->getPDO();
 var_dump($pdo);
 if(!empty($_SESSION['id'])){
     $user = new User;
+    $user->getPlayerInfos($pdo);
 }
 
 ?>
@@ -33,7 +34,7 @@ if(!empty($_SESSION['id'])){
                 <?php if (!empty($_SESSION['id'])): ?>
                 <div id="playerInfos">
                     <table class="table table-condensed">Informations joueur :
-                        $user->getPlayerInfos($pdo);
+                        <?php $user->getPlayerInfos($pdo); ?>
                     </table>
                 </div>
             <?php  endif;?>

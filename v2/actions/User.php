@@ -2,11 +2,12 @@
 /**
  * Classe User
  *
+ * --Changelog
+ * version 1.0.0 (29/10/2016) Amaïa
+ * - Création de la classe
+ *
  * @author Amaïa
- * @version 0.0.1
- *
- * Date: 29/10/2016
- *
+ * @version 1.0.0
  */
 
 class User{
@@ -33,11 +34,15 @@ class User{
 	    $req->closeCursor();
 	}
 
+	public function getUsername(){
+		
+	}
+
 // Classement des joueurs
 	public function playersRankedScoreTable($pdo){
-		$prep = $pdo->prepare('SELECT J.id, J.username, S.`playerScore` FROM `scores` S, joueurs J WHERE S.playerID = J.id ORDER BY S.playerScore DESC;');
-  	$prep->execute();
-		$infos = $prep->fetchAll();
+		$req = $pdo->prepare('SELECT J.id, J.username, S.`playerScore` FROM `scores` S, joueurs J WHERE S.playerID = J.id ORDER BY S.playerScore DESC;');
+  	$req->execute();
+		$infos = $req->fetchAll();
 		$i = 1;
 		foreach ($infos as $info) {
 			?>
@@ -48,6 +53,6 @@ class User{
 			</tr>
 			<?php
 		}
-		$prep->closeCursor();
+		$req->closeCursor();
 	}
 }
