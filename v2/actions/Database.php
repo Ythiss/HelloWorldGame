@@ -1,14 +1,13 @@
 <?php
 
 /**
- * Appel à la bdd
- *
- * @author Amaïa
- * @version: 0.0.1
- *
+ * Created by PhpStorm.
+ * User: Amaïa
  * Date: 29/10/2016
- *
+ * Time: 15:36
  */
+
+
 
 class Database{
 
