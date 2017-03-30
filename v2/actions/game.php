@@ -5,19 +5,15 @@
  * Date: 29/09/2016
  * Time: 19:09
  */
-
+require __DIR__.'/../config/init.php';
 session_start();
 
-
-include_once '../actions/bdd/Database.php';
-include_once '../actions/User.php';
-require_once 'header.php';
-require_once 'menu.php';
+require PATH_TEMPLATE . 'header.php';
+require PATH_TEMPLATE . 'menu.php';
 
 $bdd = new Database();
 
 $pdo = $bdd->getPDO();
-var_dump($pdo);
 if(!empty($_SESSION['id'])){
     $user = new User;
 }
@@ -46,6 +42,6 @@ if(!empty($_SESSION['id'])){
 </div>
 <?php
 
-require_once 'footer.php';
+require_once PATH_TEMPLATE . 'footer.php';
 
 ?>

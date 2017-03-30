@@ -17,23 +17,35 @@ class User{
 	public $pdo;
 
 // Récupère les infos du joueur
-	public function getPlayerInfos($pdo){
-	    $req = $pdo->prepare("SELECT id, username, psw, email FROM joueurs WHERE id = ?");
+	public function getPlayerInfos(){
+		  $pdo = Database::getPDO();
+	    $req = $pdo->prepare("SELECT id, username, psw, email FROM joueurs WHERE id = 1");
 	    $req->execute(array($_SESSION['id']));
 	    $infos = $req->fetchAll();
-			foreach ($infos as $info) {
-				?>
-				<tr>
-						<td><u>Pseudo</u> : <?php echo $info['username'];?></td>
-				</tr>
-				<tr>
-						<td><u>Score</u> : <?php echo $info['playerScore'];?></td>
-				</tr>
-				<?php
-			}
-	    $req->closeCursor();
+			$req->closeCursor();
+			//var_dump($infos);
+			return $infos;
 	}
 
+	public function getScore(){
+		  $pdo = Database::getPDO();
+	    $req = $pdo->prepare("SELECT `playerID`,`playerScore`,`dateScore` FROM scores WHERE id = 1");
+	    $req->execute(array($_SESSION['id']));
+	    $scores = $req->fetchAll();
+			$req->closeCursor();
+			//var_dump($infos);
+			return $scores;
+	}
+
+
+public function getSessionId($username,$psw){
+	$pdo = Database::getPDO();
+	$prep = $pdo->prepare('SELECT id FROM joueurs WHERE username = ? AND psw = ?');
+	$prep->execute(array($username, $psw));
+	$checkUsernamePsw = $prep->fetch();
+	$prep->closeCursor();
+	return $checkUsernamePsw;
+}
 
 // Classement des joueurs
 	public function playersRankedScoreTable($pdo){

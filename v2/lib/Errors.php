@@ -17,18 +17,7 @@ class Errors{
 		if(empty($_SESSION)){
 
 			//header('Location: ' . URL_SITE . '/actions/home.php?msg=errorNotConnected');
-			?>
-		    <!-- <div class="container">
-		        <div class="row">
-		            <div class="row flex-items-xs-middle">
-		                <div class="col-xs">
-		                    <p>Vous n'avez pas le droit d'accèder à cette page ! ;)</p><br>
-		                    <a href="home.php"><button class="btn btn-primary">Revenir en arrière</button></a>
-		                </div>
-		            </div>
-		        </div>
-		    </div> -->
-		    <?php
+
 		}
 	}
 }

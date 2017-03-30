@@ -1,0 +1,30 @@
+# Le serveur doit suivre les liens symboliques :
+ Options +FollowSymlinks
+
+ # Activation du module de reecriture d'URL :
+ RewriteEngine on
+
+ RewriteRule !^(robots.txt|datas|images|inc)(.*)$ index.php [QSA,PT,L]
+
+
+
+         if (empty($_SERVER['REDIRECT_URL']) === false) {
+
+             //list($module, $action) = explode('/', substr($_SERVER['REDIRECT_URL'], 1));
+             $control = explode('/', substr($_SERVER['REDIRECT_URL'], 1));
+         }
+
+         // Gestion des sous modules
+         if (isset($control[0]) === true) {
+             $module = self::replaceModule($control[0]);
+         } else {
+             $module = false;
+         }
+
+         if (isset($control[1]) === true) {
+             $action = $control[1];
+         } else {
+             $action = false;
+         }
+
+

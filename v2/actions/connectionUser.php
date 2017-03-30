@@ -5,26 +5,22 @@
  * Date: 29/10/2016
  * Time: 23:27
  */
-include 'Database.php';
+ require __DIR__.'/../config/init.php';
 
-$bdd = new Database();
-
-$pdo = $bdd->getPDO();
 
 if (empty($_POST['username']) || empty($_POST['psw'])){
     echo 'Erreur : Des champs ne sont pas renseignés !<br>'. PHP_EOL;
 }
 else{
-    $prep = $pdo->prepare('SELECT id FROM joueurs WHERE username = ? AND psw = ?');
-    $prep->execute(array($_POST['username'], $_POST['psw']));
-    $checkUsernamePsw = $prep->fetch();
-    $prep->closeCursor();
+$user = new User();
+ $checkUsernamePsw = $user->getSessionId($_POST['username'], $_POST['psw']);
+
     if (!$checkUsernamePsw) {
         echo 'Mauvais identifiant ou mot de passe !';
     } else {
         session_start();
         $_SESSION['id'] = $checkUsernamePsw['id'];
 
-        header("Location: ../public/account.php");
+        header("Location: ../actions/account.php");
     }
 }

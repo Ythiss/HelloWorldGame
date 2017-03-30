@@ -8,34 +8,40 @@
  * Date: 29/09/2016
  *
  */
-require '../config/init.php';
-require PATH_CONFIG . 'Secure.php';
+require __DIR__.'/../config/init.php';
+
+require PATH_CONFIG.'Secure.php';
 session_start();
 
-require 'header.php';
-require 'menu.php';
+require PATH_TEMPLATE . 'header.php';
+require PATH_TEMPLATE . 'menu.php';
 
-
+$pdo = $infos = '';
 if(!empty($_SESSION)){
-    include_once '../actions/bdd/Database.php';
+
     $bdd = new Database();
-
     $pdo = $bdd->getPDO($pdo);
+    $user = new User;
+    $scores = $user->getScore();
+    $infos = $user->getPlayerInfos();
 
-    if(!empty($_POST)){
-        $pseudo = $_POST['username'];
-        $mdp = $_POST['psw'];
-        $mail = $_POST['email'];
-
-        $user = new User;
-        $user->getPlayerInfos();
+    foreach ($scores as $score) {
+      ?>
+      <tr>
+          <td><u>Pseudo</u> : <?php echo $score['dateScore'];?></td>
+      </tr>
+      <tr>
+          <td><u>Score</u> : <?php echo $score['playerScore'];?></td>
+      </tr>
+      <?php
     }
-    ?>
+?>
 
     <div class="container">
         <div class="row flex-items-xs-middle">
             <div class="col-xs">
                 <h1>Bienvenue sur votre compte <?= $infos['username'] ?>!</h1>
+
                 <h3><u>Vos informations personnelles</u> :</h3>
                 <table class="table">
                     <tr>
@@ -109,4 +115,4 @@ if(!empty($_SESSION)){
     <?php
     }
 
-require_once 'footer.php';
+require_once PATH_TEMPLATE . 'footer.php';

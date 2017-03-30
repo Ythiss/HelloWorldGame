@@ -5,10 +5,26 @@
  * Date: 29/09/2016
  * Time: 09:31
  */
+require __DIR__.'/../config/init.php';
+require_once PATH_TEMPLATE . 'header.php';
+//
+// if($_GET['msg']) {
+//
+//   switch ($_GET['msg']
+// ) {
+//     case 'errorNotConnected':
+//       $message = 'Vous n\'avez pas le droit d\'accèder à cette page ! ;)';
+//       $display = '';
+//       break;
+//
+//     default:
+//       # code...
+//       break;
+//   }
 
-require_once 'header.php';
+
+//}
 ?>
-
 <div id="homepage">
     <div id="homepageImg">
         <div class="container">
@@ -27,4 +43,4 @@ require_once 'header.php';
 </div>
 
 <?php
-require_once 'footer.php';
+require_once PATH_TEMPLATE . 'footer.php';
