@@ -2,10 +2,14 @@
 function __autoload($class_name) {
     include '../lib/' . $class_name . '.php';
 }
+// Activation mode debug
+//Debug::active();
 
 define ('URL_SITE', 'http://localhost/helloworldgame/v2');
-define ('URL_CSS', URL_SITE . '/public/css');
-define ('URL_IMG', URL_SITE . '/public/img');
+define ('URL_CSS', '../public/css');
+define ('URL_IMG', '../public/img');
+define ('URL_ACTIONS', URL_SITE . '/actions/');
+
 define ('PATH_SITE', __DIR__ . '/../');
 define ('PATH_LIB', PATH_SITE . 'lib/');
 define ('PATH_CONFIG', PATH_SITE . 'config/');

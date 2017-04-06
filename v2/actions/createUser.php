@@ -36,16 +36,16 @@ if(!empty($_POST['username']) && !empty($_POST['psw']) && !empty($_POST['email']
             session_start();
             $_SESSION['id'] = $checkUsernamePsw['id'];
 
-            header("Location: ../public/account.php");
+            header("Location:". URL_ACTIONS."account.php");
         }
     }
     else{
         echo 'Ce pseudo existe deja ! :/ <br>'.PHP_EOL;
-        echo '<a href="../public/game.php#signUp"><button type="button" class="btn btn-default">Revenir en arrière</button></a>';
+        echo '<a href="'. URL_ACTIONS.'"game.php#signUp"><button type="button" class="btn btn-default">Revenir en arrière</button></a>';
     }
 }
 else {
     echo 'Erreur : Des champs ne sont pas renseignés !<br>'. PHP_EOL;
     echo "La requête a échoué... :( <br>" . PHP_EOL;
-    echo '<a href="../public/game.php#signUp"><button type="button" class="btn btn-default">Revenir en arrière</button></a>';
+    echo '<a href="'. URL_ACTIONS.'"game.php#signUp"><button type="button" class="btn btn-default">Revenir en arrière</button></a>';
 }

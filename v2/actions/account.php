@@ -8,16 +8,16 @@
  * Date: 29/09/2016
  *
  */
-require __DIR__.'/../config/init.php';
 
-require PATH_CONFIG.'Secure.php';
-session_start();
+ session_start();
+require __DIR__.'/../config/init.php';
 
 require PATH_TEMPLATE . 'header.php';
 require PATH_TEMPLATE . 'menu.php';
 
+Errors::checkIsNotConnect();
+
 $pdo = $infos = '';
-if(!empty($_SESSION)){
 
     $bdd = new Database();
     $pdo = $bdd->getPDO($pdo);
@@ -113,6 +113,6 @@ if(!empty($_SESSION)){
         </div>
     </div>
     <?php
-    }
+    
 
 require_once PATH_TEMPLATE . 'footer.php';

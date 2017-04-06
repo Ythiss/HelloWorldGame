@@ -5,19 +5,11 @@
  * Date: 10/10/2016
  * Time: 10:35
  */
+ session_start();
+require __DIR__.'/../config/init.php';
 
-include 'Database.php';
+Errors::checkIsNotConnect();
 
-$bdd = new Database();
+User::destroyAccount();
 
-$pdo = $bdd->getPDO();
-
-session_start();
-
-$prep = $pdo->prepare('DELETE FROM joueurs WHERE id = ?');
-$prep->execute(array($_SESSION['id']));
-
-$_SESSION = array();
-session_destroy();
-unset($_SESSION);
-header("Location: ../public/home.php");
+User::deconnection();

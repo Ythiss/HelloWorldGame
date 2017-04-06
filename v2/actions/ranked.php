@@ -9,20 +9,23 @@
  *
  */
 
-session_start();
+ require __DIR__.'/../config/init.php';
+ session_start();
 
-require_once 'header.php';
-require_once 'menu.php';
+ require PATH_TEMPLATE . 'header.php';
+ require PATH_TEMPLATE . 'menu.php';
 
-include_once '../actions/bdd/Database.php';
+ $user = new User;
 
-$bdd = new Database();
+ if(!empty($_SESSION['id'])){
+     $userConnected = $user->getPlayerInfos();
 
-$pdo = $bdd->getPDO();
-
-include_once '../actions/User.php';
-
-$user = new User();
+ }else{
+   $userConnected = array(
+     'id' => ''
+   );
+ }
+ Debug::printDebug($userConnected);
 ?>
     <div class="container">
         <div class="row">
@@ -37,8 +40,26 @@ $user = new User();
                         </tr>
                         </thead>
                           <tbody>
+                            <?php $i = 1;
+
+                            $infos = $user->playersRankedScoreTable();
+                             Debug::printDebug($infos);
+                              foreach ($infos as $info) {
+                                if ($userConnected['id'] == $info['id']){
+                                  $bold = ' <b>(moi)</b>';
+                                }else{
+                                  $bold = '';
+                                }
+                            ?>
+                            <tr>
+                      				<td><?= $i++ ?></td>
+                      				<td><?= $info['username'] . $bold; ?></td>
+                      				<td><?= $info['playerScore']; ?></td>
+                      			</tr>
                               <?php
-                                $user->playersRankedScoreTable($pdo);
+                            }
+
+                                //var_dump($user);
                               ?>
                           </tbody>
                     </table>
@@ -47,5 +68,5 @@ $user = new User();
         </div>
     </div>
     <?php
-    require_once 'footer.php';
+  require PATH_TEMPLATE . 'footer.php';
 ?>

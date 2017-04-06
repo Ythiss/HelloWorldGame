@@ -29,7 +29,7 @@ if(!empty($_SESSION['id'])){
                 <?php if (!empty($_SESSION['id'])): ?>
                 <div id="playerInfos">
                     <table class="table table-condensed">Informations joueur :
-                        <?php $user->getPlayerInfos($pdo);?>
+                        <?php $user->getPlayerInfos();?>
                     </table>
                 </div>
             <?php  endif;?>
