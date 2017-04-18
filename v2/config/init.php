@@ -8,7 +8,7 @@ function __autoload($class_name) {
 define ('URL_SITE', 'http://localhost/helloworldgame/v2');
 define ('URL_CSS', '../public/css');
 define ('URL_IMG', '../public/img');
-define ('URL_ACTIONS', URL_SITE . '/actions/');
+define ('URL_ACTIONS', '../actions/');
 
 define ('PATH_SITE', __DIR__ . '/../');
 define ('PATH_LIB', PATH_SITE . 'lib/');
