@@ -21,41 +21,34 @@ $pdo = $infos = '';
 
     $bdd = new Database();
     $pdo = $bdd->getPDO($pdo);
-    $user = new User;
-    $scores = $user->getScore();
-    $infos = $user->getPlayerInfos();
-
-    foreach ($scores as $score) {
-      ?>
-      <tr>
-          <td><u>Pseudo</u> : <?php echo $score['dateScore'];?></td>
-      </tr>
-      <tr>
-          <td><u>Score</u> : <?php echo $score['playerScore'];?></td>
-      </tr>
-      <?php
-    }
 ?>
 
     <div class="container">
         <div class="row flex-items-xs-middle">
             <div class="col-xs">
-                <h1>Bienvenue sur votre compte <?= $infos['username'] ?>!</h1>
+                <h1>Bienvenue sur votre compte !</h1>
 
                 <h3><u>Vos informations personnelles</u> :</h3>
                 <table class="table">
+                  <?php
+                  $infosPlayer = User::getPlayerInfos();
+                  foreach ($infosPlayer as $infoPlayer) {
+                  ?>
                     <tr>
                         <td><u>Pseudo</u></td>
-                        <td><?= $infos['username'] ?></td>
+                        <td><?= $infoPlayer['username']; ?></td>
                     </tr>
                     <tr>
                         <td><u>Mot de passe</u></td>
-                        <td><?= $infos['psw'] ?></td>
+                        <td><?= $infoPlayer['psw']; ?></td>
                     </tr>
                     <tr>
                         <td><u>Email</u></td>
-                        <td><?= $infos['email'] ?></td>
+                        <td><?= $infoPlayer['email']; ?></td>
                     </tr>
+                    <?php
+                  }
+                ?>
                 </table>
                 <a href="modificationInfos.php"><button type="button" class="btn btn-link">Modifier mes informations</button></a>
             </div>
@@ -85,8 +78,7 @@ $pdo = $infos = '';
             <div class="col-xs-6">
                 <h2>Historique de scores</h2>
                 <?php
-                $req = $pdo->prepare("SELECT playerScore, dateScore FROM joueurs AS J INNER JOIN scores AS S ON J.id = S.playerID WHERE S.playerID = ? ORDER BY S.dateScore DESC;");
-                $req->execute(array($_SESSION['id']));
+                $infosScores = User::playerHistoric();
                 ?>
                 <table class="table table-bordered">
                     <thead>
@@ -96,7 +88,7 @@ $pdo = $infos = '';
                     </tr>
                     </thead>
                     <?php
-                        foreach($historique = $req->fetchAll() as $value) {
+                        foreach($infosScores as $value) {
                     ?>
                     <tbody>
                     <tr>
@@ -105,7 +97,6 @@ $pdo = $infos = '';
                     </tr>
                     </tbody>
                     <?php
-                            $req->closeCursor();
                         }
                     ?>
                 </table>
@@ -113,6 +104,6 @@ $pdo = $infos = '';
         </div>
     </div>
     <?php
-    
+
 
 require_once PATH_TEMPLATE . 'footer.php';
