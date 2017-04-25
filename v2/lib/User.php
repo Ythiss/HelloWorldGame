@@ -14,38 +14,8 @@ class User{
 	public $username;
 	public $psw;
 	public $email;
+	public $id;
 	public $pdo;
-
-// Récupère les infos du joueur
-	public function getPlayerInfos(){
-		  $pdo = Database::getPDO();
-	    $req = $pdo->prepare("SELECT id, username, psw, email FROM joueurs WHERE id = 1");
-	    $req->execute(array($_SESSION['id']));
-	    $infos = $req->fetch();
-			$req->closeCursor();
-			//var_dump($infos);
-			return $infos;
-	}
-
-	public function getPlayerUsername(){
-		  $pdo = Database::getPDO();
-	    $req = $pdo->prepare("SELECT username FROM joueurs WHERE id = ?");
-	    $req->execute(array($_SESSION['id']));
-	    $username = $req->fetch();
-			$req->closeCursor();
-			//var_dump($infos);
-			return $username;
-	}
-
-	public function getScore(){
-		  $pdo = Database::getPDO();
-	    $req = $pdo->prepare("SELECT `playerID`,`playerScore`,`dateScore` FROM scores WHERE id = 1");
-	    $req->execute(array($_SESSION['id']));
-	    $scores = $req->fetchAll();
-			$req->closeCursor();
-			//var_dump($infos);
-			return $scores;
-	}
 
 
 public function getSessionId($username,$psw){
@@ -57,6 +27,17 @@ public function getSessionId($username,$psw){
 	return $checkUsernamePsw;
 }
 
+// Récupère les infos du joueur
+	static function getPlayerInfos(){
+		  $pdo = Database::getPDO();
+	    $req = $pdo->prepare("SELECT id, username, psw, email FROM joueurs WHERE id = 1");
+	    $req->execute(array($_SESSION['id']));
+	    $infos = $req->fetchAll();
+			$req->closeCursor();
+			var_dump($infos);
+			return $infos;
+	}
+
 // Classement des joueurs
 	public function playersRankedScoreTable(){
 		$pdo = Database::getPDO();
@@ -64,6 +45,15 @@ public function getSessionId($username,$psw){
   	$req->execute();
 		$infos = $req->fetchAll();
 		$req->closeCursor();
+		return $infos;
+	}
+
+	static function playerHistoric(){
+		$pdo = Database::getPDO();
+		$req = $pdo->prepare("SELECT playerScore, dateScore FROM joueurs AS J INNER JOIN scores AS S ON J.id = S.playerID WHERE S.playerID = ? ORDER BY S.dateScore DESC;");
+		$req->execute(array($_SESSION['id']));
+		$infos = $req->fetchAll();
+		var_dump($infos);
 		return $infos;
 	}
 
