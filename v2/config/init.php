@@ -5,7 +5,7 @@ function __autoload($class_name) {
 // Activation mode debug
 //Debug::active();
 
-define ('URL_SITE', 'http://localhost/helloworldgame/v2');
+define ('URL_SITE', 'http://localhost/HelloWorldGame/v2');
 define ('URL_CSS', '../public/css');
 define ('URL_IMG', '../public/img');
 define ('URL_ACTIONS', '../actions/');
