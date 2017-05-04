@@ -11,14 +11,34 @@
  */
 
 class User{
-	public $username;
-	public $psw;
-	public $email;
-	public $id;
-	public $pdo;
+	private $username;
+	private $psw;
+	private $email;
+	private $id;
+	private $pdo;
 
 
-public function getSessionId($username,$psw){
+public function __construct($id){
+	$infos = $this->getPlayerInfos($id);
+	$this->username = $infos['username'];
+	$this->psw = $infos['psw'];
+	$this->email = $infos['email'];
+	$this->id = $id;
+}
+
+public function getUsername(){
+	return $this->username;
+}
+
+public function getPsw(){
+	return $this->psw;
+}
+
+public function getEmail(){
+	return $this->email;
+}
+
+static function getSessionId($username,$psw){
 	$pdo = Database::getPDO();
 	$prep = $pdo->prepare('SELECT id FROM joueurs WHERE username = ? AND psw = ?');
 	$prep->execute(array($username, $psw));
@@ -28,13 +48,12 @@ public function getSessionId($username,$psw){
 }
 
 // Récupère les infos du joueur
-	static function getPlayerInfos(){
+	static function getPlayerInfos($id){
 		  $pdo = Database::getPDO();
-	    $req = $pdo->prepare("SELECT id, username, psw, email FROM joueurs WHERE id = 1");
-	    $req->execute(array($_SESSION['id']));
-	    $infos = $req->fetchAll();
+	    $req = $pdo->prepare("SELECT username, psw, email FROM joueurs WHERE id = ?");
+	    $req->execute(array($id));
+	    $infos = $req->fetch();
 			$req->closeCursor();
-			var_dump($infos);
 			return $infos;
 	}
 
@@ -48,12 +67,15 @@ public function getSessionId($username,$psw){
 		return $infos;
 	}
 
-	static function playerHistoric(){
+
+
+// Historique des scores du joueur
+		static function playerHistoric(){
 		$pdo = Database::getPDO();
 		$req = $pdo->prepare("SELECT playerScore, dateScore FROM joueurs AS J INNER JOIN scores AS S ON J.id = S.playerID WHERE S.playerID = ? ORDER BY S.dateScore DESC;");
 		$req->execute(array($_SESSION['id']));
 		$infos = $req->fetchAll();
-		var_dump($infos);
+		//var_dump($infos);
 		return $infos;
 	}
 

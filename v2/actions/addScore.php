@@ -6,11 +6,9 @@
  * Time: 22:04
  */
 
-include 'Database.php';
+ require __DIR__.'/../config/init.php';
 
-$bdd = new Database();
-
-$pdo = $bdd->getPDO();
+ $pdo = Database::getPDO();
 
 $date = date("Y-m-d H:i:s");
 
@@ -23,4 +21,4 @@ $prep->execute(array($_SESSION['id'], $_POST['score'], $date));
 echo $_SESSION['id'];
 echo $_POST['score'];
 
-header('Location: ../public/account.php?id='.$_SESSION['id']);
+header('Location: '. URL_SITE . '/actions/account.php?id='.$_SESSION['id']);

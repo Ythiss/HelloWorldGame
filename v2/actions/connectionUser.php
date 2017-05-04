@@ -12,15 +12,15 @@ if (empty($_POST['username']) || empty($_POST['psw'])){
     echo 'Erreur : Des champs ne sont pas renseignés !<br>'. PHP_EOL;
 }
 else{
-$user = new User();
- $checkUsernamePsw = $user->getSessionId($_POST['username'], $_POST['psw']);
+ $checkUsernamePsw = User::getSessionId($_POST['username'], $_POST['psw']);
 
     if (!$checkUsernamePsw) {
         echo 'Mauvais identifiant ou mot de passe !';
     } else {
         session_start();
-        $_SESSION['id'] = $checkUsernamePsw['id'];
+        //Debug::printDebug($checkUsernamePsw);die;
+        $_SESSION['id'] = $checkUsernamePsw['0'];
 
-        header("Location: ../actions/account.php");
+        header('Location: '. URL_SITE . '/actions/account.php');
     }
 }

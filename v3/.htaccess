@@ -1,0 +1,7 @@
+# Le serveur doit suivre les liens symboliques :
+ Options +FollowSymlinks
+
+ # Activation du module de reecriture d'URL :
+ RewriteEngine on
+
+ RewriteRule !^(images|public)(.*)$ index.php [QSA,PT,L]

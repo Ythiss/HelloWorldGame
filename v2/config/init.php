@@ -3,7 +3,7 @@ function __autoload($class_name) {
     include '../lib/' . $class_name . '.php';
 }
 // Activation mode debug
-//Debug::active();
+Debug::active();
 
 define ('URL_SITE', 'http://localhost/HelloWorldGame/v2');
 define ('URL_CSS', '../public/css');

@@ -8,19 +8,20 @@
  * Date: 29/09/2016
  *
  */
-
  session_start();
 require __DIR__.'/../config/init.php';
-
 require PATH_TEMPLATE . 'header.php';
 require PATH_TEMPLATE . 'menu.php';
 
 Errors::checkIsNotConnect();
+$user = new User($_SESSION['id']);
+$user2 = new User(13);
+Debug::printDebug($user);
+$infosPlayer = User::getPlayerInfos($_SESSION['id']);
+$infosScores = User::playerHistoric();
 
-$pdo = $infos = '';
-
-    $bdd = new Database();
-    $pdo = $bdd->getPDO($pdo);
+//Debug::printDebug($_SESSION['id']);
+//Debug::printDebug($infosPlayer);
 ?>
 
     <div class="container">
@@ -30,30 +31,73 @@ $pdo = $infos = '';
 
                 <h3><u>Vos informations personnelles</u> :</h3>
                 <table class="table">
-                  <?php
-                  $infosPlayer = User::getPlayerInfos();
-                  foreach ($infosPlayer as $infoPlayer) {
-                  ?>
                     <tr>
                         <td><u>Pseudo</u></td>
-                        <td><?= $infoPlayer['username']; ?></td>
+                        <td><?= $user->getUsername(); ?></td>
                     </tr>
                     <tr>
                         <td><u>Mot de passe</u></td>
-                        <td><?= $infoPlayer['psw']; ?></td>
+                        <td><?= $user->getPsw(); ?></td>
                     </tr>
                     <tr>
                         <td><u>Email</u></td>
-                        <td><?= $infoPlayer['email']; ?></td>
+                        <td><?= $user->getEmail(); ?></td>
                     </tr>
-                    <?php
-                  }
-                ?>
                 </table>
-                <a href="modificationInfos.php"><button type="button" class="btn btn-link">Modifier mes informations</button></a>
+                <a href="#updateInfos" data-toggle="modal" data-target="#updateInfos"><button type="button" class="btn btn-link">Modifier mes informations</button></a>
             </div>
         </div>
     </div>
+
+    <!-- Modal modification informations-->
+    <div id="updateInfos" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modifier mes informations</h4>
+                </div>
+                <div class="modal-body">
+                  <form method="POST" action="<?php echo URL_SITE?>/actions/modificationInfos.php" class="form-horizontal" enctype="multipart/form-data">
+                      <div class="form-group">
+                          <label class="col-sm-4 control-label">Pseudo :</label>
+                          <div class="col-sm-8">
+                              <input type="text" name="newpseudo" placeholder="Pseudo" class="form-control" value="<?php echo $infosPlayer['username']; ?>" />
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputEmail3" class="col-sm-4 control-label">Mail :</label>
+                          <div class="col-sm-8">
+                              <input type="text" name="newmail" placeholder="Mail" class="form-control" value="<?php echo $infosPlayer['email']; ?>" />
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputPassword3" class="col-sm-4 control-label">Mot de passe :</label>
+                          <div class="col-sm-8">
+                              <input type="password" name="newmdp1" class="form-control" placeholder="Mot de passe"/>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label for="inputPassword3" class="col-sm-4 control-label">Confirmation - mot de passe :</label>
+                          <div class="col-sm-8">
+                           <input type="password" name="newmdp2" class="form-control" placeholder="Confirmation du mot de passe" />
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="col-xs-5 col-xs-offset-3">
+                              <button type="submit" class="btn btn-success">Enregistrer</button>
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                          </div>
+                      </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- FIN - Modal modification informations-->
+
     <div class="container">
         <div class="row flex-items-xs-middle">
             <div class="col-xs-6">
@@ -77,9 +121,6 @@ $pdo = $infos = '';
             </div>
             <div class="col-xs-6">
                 <h2>Historique de scores</h2>
-                <?php
-                $infosScores = User::playerHistoric();
-                ?>
                 <table class="table table-bordered">
                     <thead>
                     <tr>
@@ -103,6 +144,43 @@ $pdo = $infos = '';
             </div>
         </div>
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script>
+
+    $(document).ready(function(){
+
+        $("#submit").click(function(){
+
+            $.post(
+                'connexion.php', // Un script PHP que l'on va créer juste après
+                {
+                    login : $("#username").val(),  // Nous récupérons la valeur de nos input que l'on fait passer à connexion.php
+                    password : $("#password").val()
+                },
+
+                function(data){
+
+                    if(data == 'Success'){
+                         // Le membre est connecté. Ajoutons lui un message dans la page HTML.
+
+                         $("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
+                    }
+                    else{
+                         // Le membre n'a pas été connecté. (data vaut ici "failed")
+
+                         $("#resultat").html("<p>Erreur lors de la connexion...</p>");
+                    }
+
+                },
+
+                'text'
+             );
+
+        });
+
+    });
+
+    </script>
     <?php
 
 

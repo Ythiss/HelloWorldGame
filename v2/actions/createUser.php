@@ -6,11 +6,10 @@
  * Time: 21:13
  */
 
-include 'Database.php';
+ require __DIR__.'/../config/init.php';
 
-$bdd = new Database();
+ $pdo = Database::getPDO();
 
-$pdo = $bdd->getPDO();
 
 if(!empty($_POST['username']) && !empty($_POST['psw']) && !empty($_POST['email'])){
     $prep = $pdo->prepare("CALL checkUsername(?)");
