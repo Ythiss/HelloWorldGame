@@ -27,7 +27,7 @@ switch ($module) {
     case ('home'):
       require PATH_CONTROLLERS . '/home/actions/'.$action.'.php';
         break;
-    case ('autrePage'):
-      require PATH_CONTROLLERS . '/autrePage/actions/'.$action.'.php';
+    case ('game'):
+      require PATH_CONTROLLERS . '/game/actions/'.$action.'.php';
         break;
 }
