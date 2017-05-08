@@ -10,4 +10,7 @@ PHP/MySQL
 Procedural PHP
 
 #### V2 [![Build Status](https://github.com/Ythiss/HelloWorldGame/tree/develop)][develop] :
+PHP with POO
+
+#### V3 [![Build Status](https://github.com/Ythiss/HelloWorldGame/tree/develop)][develop] :
 PHP with MVC pattern
