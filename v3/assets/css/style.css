@@ -1,0 +1,143 @@
+body{
+    margin: 0;
+}
+
+/**
+******************************** HOMEPAGE ********************************
+**/
+
+div#homepage{
+    width: 100%;
+    min-height: 100vh;
+}
+
+div#homepageImg{
+    min-height: 100vh;
+    background-image: url('../img/bl.png');
+    background-repeat: no-repeat;
+    padding: 0;
+}
+
+.row flex-items-xs-middle{
+    min-height: 100vh;
+    vertical-align: middle;
+}
+
+div#homeGame{
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 150px;
+}
+
+div#homeGame h1{
+    text-align: center;
+    color: #ffffff;
+    border: 1px;
+    border-color: #E82512;
+}
+
+#buttonPlay{
+    text-align: center;
+}
+
+#buttonPlay .btn {
+    padding: 15px 30px;
+    padding: 1.5vh 3vh;
+}
+.btn.btn-primary {
+    color: #ffffff;
+    background-color: #FF0000;
+    border-color: #E82512;
+}
+.btn-primary {
+    color: #ffffff;
+    background-color: #FF0000;
+    border-color: #E82512;
+}
+
+.btn .btn-primary:active{
+    color: #ffffff;
+    background-color: #d9534f;
+    border-color: #E82512;
+}
+.btn {
+    border-bottom-width: 2px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+a {
+    color: #FF0000;
+    text-decoration: none;
+}
+a {
+    background: transparent;
+}
+
+
+
+*, *::before, *::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/**
+************** GAME PAGE
+**/
+
+.navbar-default {
+    background-color: #48494a;
+    border-color: #e7e7e7;
+}
+
+.navbar-default .navbar-brand {
+    color: #757a80;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+    color: #757a80;
+    background-color: #e7e7e7;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #757a80;
+}
+
+.navbar-default .navbar-nav > li > a:hover, a:active{
+    color: #ffffff;
+}
+
+#playerInfos{
+    text-align: center;
+}
+
+#game {
+    width : 736px;
+    height : 500px;
+    border-style: solid;
+    border-width: 2px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
