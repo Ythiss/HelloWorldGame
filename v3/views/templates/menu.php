@@ -42,7 +42,7 @@
                 <h4 class="modal-title">Connexion</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="post" action="<?php echo URL_SITE?>/actions/connectionUser.php">
+                <form class="form-horizontal" method="post" action="<?php echo URL_SITE?>/connection/identification">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Username</label>
                         <div class="col-sm-10">

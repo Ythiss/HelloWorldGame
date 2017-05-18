@@ -13,7 +13,7 @@
 class Database{
 
     private static $dbUser = "root";
-    private static $dbPass = "SamRootMachine";
+    private static $dbPass = "";
     private static $dbUrl = "mysql:host=localhost;dbname=helloworldgame";
     private static $pdo = false;
 

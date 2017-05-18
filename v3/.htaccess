@@ -4,4 +4,4 @@
  # Activation du module de reecriture d'URL :
  RewriteEngine on
 
- RewriteRule !^(images|public)(.*)$ index.php [QSA,PT,L]
+ RewriteRule !^(assets|images|public)(.*)$ index.php [QSA,PT,L]

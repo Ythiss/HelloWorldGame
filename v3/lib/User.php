@@ -9,8 +9,8 @@
  * @author Amaïa
  * @version 1.0.0
  */
- 
-namespace lib;
+
+//namespace lib;
 
 class User{
 	private $username;

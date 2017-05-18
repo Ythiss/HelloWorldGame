@@ -6,8 +6,8 @@
 //Debug::active();
 
 define ('URL_SITE', 'http://localhost/HelloWorldGame/v3');
-define ('URL_CSS', '../assets/css');
-define ('URL_IMG', '../assets/img');
+define ('URL_CSS', URL_SITE . '/assets/css');
+define ('URL_IMG', URL_SITE . '/assets/img');
 define ('URL_ACTIONS', '../actions/');
 
 define ('PATH_SITE', __DIR__ . '/');
@@ -17,5 +17,8 @@ define ('PATH_TEMPLATE', PATH_SITE . 'views/templates/');
 
 define ('PATH_CONTROLLERS', PATH_SITE . 'controllers/');
 define ('PATH_VIEWS', PATH_SITE . 'views/');
+define ('PATH_MODELS', PATH_SITE . 'models/');
 
 require_once 'vendor/autoload.php';
+
+require PATH_MODELS.'Database.php';

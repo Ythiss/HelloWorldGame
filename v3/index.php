@@ -24,10 +24,7 @@ if (empty($control[1]) === false) {
 switch ($module) {
     default:
     case (''):
-    case ('home'):
-      require PATH_CONTROLLERS . '/home/actions/'.$action.'.php';
+      require PATH_CONTROLLERS . '/'.$module.'/actions/'.$action.'.php';
         break;
-    case ('game'):
-      require PATH_CONTROLLERS . '/game/actions/'.$action.'.php';
-        break;
+
 }
