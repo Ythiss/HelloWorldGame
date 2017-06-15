@@ -2,4 +2,4 @@
 
 //use lib\User;
 
- $checkUsernamePsw = lib\User::getSessionId($_POST['username'], $_POST['psw']);
+ $checkUsernamePsw = User::getSessionId($_POST['username'], $_POST['psw']);
